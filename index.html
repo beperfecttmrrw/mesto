@@ -11,17 +11,91 @@
 
 <body class="root">
   <div class="page">
+
+    <!--* header -->
     <header class="header">
       <img src="./images/mesto__logo.svg" alt="Логотип приложения Место" class="header__logo">
     </header>
 
     <main class="content">
 
+      <!--* profile -->
+      <section class="profile">
+        <img src="./images/cousteau.jpg" alt="Фотография пользователя или какое-то другое изображение"
+          class="profile__picture">
+        <div class="profile__info">
+          <div class="profile__personal-data">
+            <h1 class="profile__name">Жак-Ив Кусто</h1>
+            <p class="profile__status">Исследователь океана</p>
+          </div>
+          <button class="profile__button profile__button_type_edit"></button>
+        </div>
+        <button class="profile__button profile__button_type_add"></button>
+      </section>
+
+      <!--* cards -->
+      <section class="cards">
+        <ul class="cards__container">
+          <li class="card">
+            <img src="./images/nizhny_novgorod.jpg" alt="Вид на башню Нижегородского кремля" class="card__image">
+            <div class="card__body">
+              <h2 class="card__title">Нижний Новгород</h2>
+              <button class="card__like-button"></button>
+            </div>
+          </li>
+          <li class="card">
+            <img src="./images/moscow_eda.jpg" alt="Курьер в Москве" class="card__image">
+            <div class="card__body">
+              <h2 class="card__title">Москва</h2>
+              <button class="card__like-button"></button>
+            </div>
+          </li>
+          <li class="card">
+            <img src="./images/nizhny_novgorod.jpg" alt="Вид на башню Нижегородского кремля" class="card__image">
+            <div class="card__body">
+              <h2 class="card__title">Нижний Новгород</h2>
+              <button class="card__like-button"></button>
+            </div>
+          </li>
+          <li class="card">
+            <img src="./images/shahunya.jpg" alt="Ну а это Шахунья" class="card__image">
+            <div class="card__body">
+              <h2 class="card__title">Шахунья</h2>
+              <button class="card__like-button"></button>
+            </div>
+          </li>
+          <li class="card">
+            <img src="./images/nizhny_novgorod.jpg" alt="Вид на башню Нижегородского кремля" class="card__image">
+            <div class="card__body">
+              <h2 class="card__title">Нижний Новгород</h2>
+              <button class="card__like-button"></button>
+            </div>
+          </li>
+          <li class="card">
+            <img src="./images/komi.jpg" alt="Коми, Республика Коми" class="card__image">
+            <div class="card__body">
+              <h2 class="card__title">Коми</h2>
+              <button class="card__like-button"></button>
+            </div>
+          </li>
+        </ul>
+      </section>
+
     </main>
 
     <footer class="footer">
-
+      <p class="footer__copyright">&copy; 2021 Mesto Russia</p>
     </footer>
+
+    <section class="popup">
+      <form class="popup__container">
+        <button class="popup__close-button"></button>
+        <h2 class="popup__header">Редактировать профиль</h2>
+        <input type="text" class="popup__name popup__input" value="">
+        <input type="text" class="popup__status popup__input" value="">
+        <button type="submit" class="popup__save-button">Сохранить</button>
+      </form>
+    </section>
   </div>
   <script defer src="./scripts/index.js"></script>
 </body>

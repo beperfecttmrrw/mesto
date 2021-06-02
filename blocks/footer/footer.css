@@ -1,3 +1,25 @@
 .footer {
-  
+  max-width: 880px;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+@media screen and (max-width: 1080px) {
+  .footer {
+    max-width: calc(100% - 2 * 100px);
+  }
+}
+
+@media screen and (max-width: 765px) {
+  .footer {
+    max-width: calc(100% - 2 * 50px);
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .footer {
+    max-width: calc(100% - 2 * 19px);
+  }
 }

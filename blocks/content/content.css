@@ -1,3 +1,32 @@
 .content {
-  
+  max-width: 880px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+@media screen and (max-width: 1080px) {
+  .content {
+    max-width: calc(100% - 2 * 100px);
+  }
+}
+
+@media screen and (max-width: 840px) {
+  .content {
+    max-width: calc(100% - 2 * 65px);
+  }
+}
+
+@media screen and (max-width: 765px) {
+  .content {
+    max-width: calc(100% - 2 * 50px);
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .content {
+    max-width: calc(100% - 2 * 19px);
+  }
 }

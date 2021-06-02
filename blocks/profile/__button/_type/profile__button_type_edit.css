@@ -1,0 +1,30 @@
+.profile__button_type_edit {
+  background-image: url(../../../../images/edit-button.svg);
+  background-size: 10px 10px;
+  width: 24px;
+  height: 24px;
+  border: 1px solid #fff;
+  margin: 0 0 30px 18px;
+}
+
+@media screen and (max-width: 880px) {
+  .profile__button_type_edit {
+    width: 20px;
+    height: 20px;
+    margin-left: 10px;
+  }
+}
+
+@media screen and (max-width: 670px) {
+  .profile__button_type_edit {
+    margin-bottom: 65px;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .profile__button_type_edit {
+    width: 18px;
+    height: 18px;
+    background-size: 7.5px 7.5px;
+  }
+}

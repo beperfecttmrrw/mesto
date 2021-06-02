@@ -1,0 +1,14 @@
+.profile__button {
+  padding: 0;
+  display: inline-block;
+  box-sizing: border-box;
+  background-color: black;
+  background-repeat: no-repeat;
+  background-position: center center;
+  transition: opacity .5s ease-in-out;
+  cursor: pointer;
+}
+
+.profile__button:hover {
+  opacity: .6;
+}
