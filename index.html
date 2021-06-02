@@ -28,9 +28,9 @@
             <h1 class="profile__name">Жак-Ив Кусто</h1>
             <p class="profile__status">Исследователь океана</p>
           </div>
-          <button class="profile__button profile__button_type_edit"></button>
+          <button type="button" class="profile__button profile__button_type_edit"></button>
         </div>
-        <button class="profile__button profile__button_type_add"></button>
+        <button type="button" class="profile__button profile__button_type_add"></button>
       </section>
 
       <!--* cards -->
@@ -40,42 +40,42 @@
             <img src="./images/nizhny_novgorod.jpg" alt="Вид на башню Нижегородского кремля" class="card__image">
             <div class="card__body">
               <h2 class="card__title">Нижний Новгород</h2>
-              <button class="card__like-button"></button>
+              <button type="button" class="card__like-button"></button>
             </div>
           </li>
           <li class="card">
             <img src="./images/moscow_eda.jpg" alt="Курьер в Москве" class="card__image">
             <div class="card__body">
               <h2 class="card__title">Москва</h2>
-              <button class="card__like-button"></button>
+              <button type="button" class="card__like-button"></button>
             </div>
           </li>
           <li class="card">
             <img src="./images/nizhny_novgorod.jpg" alt="Вид на башню Нижегородского кремля" class="card__image">
             <div class="card__body">
               <h2 class="card__title">Нижний Новгород</h2>
-              <button class="card__like-button"></button>
+              <button type="button" class="card__like-button"></button>
             </div>
           </li>
           <li class="card">
             <img src="./images/shahunya.jpg" alt="Ну а это Шахунья" class="card__image">
             <div class="card__body">
               <h2 class="card__title">Шахунья</h2>
-              <button class="card__like-button"></button>
+              <button type="button" class="card__like-button"></button>
             </div>
           </li>
           <li class="card">
             <img src="./images/nizhny_novgorod.jpg" alt="Вид на башню Нижегородского кремля" class="card__image">
             <div class="card__body">
               <h2 class="card__title">Нижний Новгород</h2>
-              <button class="card__like-button"></button>
+              <button type="button" class="card__like-button"></button>
             </div>
           </li>
           <li class="card">
             <img src="./images/komi.jpg" alt="Коми, Республика Коми" class="card__image">
             <div class="card__body">
               <h2 class="card__title">Коми</h2>
-              <button class="card__like-button"></button>
+              <button type="button" class="card__like-button"></button>
             </div>
           </li>
         </ul>
@@ -87,14 +87,18 @@
       <p class="footer__copyright">&copy; 2021 Mesto Russia</p>
     </footer>
 
+    <!-- ! Извините, но как реализовать БЭМ-миксы для позиционирования я пока не очень понимаю, и сейчас нет времени-->
+    <!-- ! разбираться, я очень сильно отстаю от графика сдачи работ, но обязательно уделю время этому вопросу в будущем.  -->
     <section class="popup">
-      <form class="popup__container">
-        <button class="popup__close-button"></button>
+      <div class="popup__container">
+        <button type="button" class="popup__close-button"></button>
         <h2 class="popup__header">Редактировать профиль</h2>
-        <input type="text" class="popup__name popup__input" value="">
-        <input type="text" class="popup__status popup__input" value="">
-        <button type="submit" class="popup__save-button">Сохранить</button>
-      </form>
+        <form>
+          <input type="text" class="popup__input popup__input_value_name" value="">
+          <input type="text" class="popup__input popup__input_value_status" value="">
+          <button type="submit" class="popup__save-button">Сохранить</button>
+        </form>
+      </div>
     </section>
   </div>
   <script defer src="./scripts/index.js"></script>
