@@ -1,0 +1,8 @@
+.card__delete {
+  width: 18px;
+  height: 19.3px;
+  background-image: url(../../../images/delete-card-icon.svg);
+  position: absolute;
+  top: 18px;
+  right: 15px;
+}

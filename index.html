@@ -36,71 +36,54 @@
       <!--* cards -->
       <section class="cards">
         <ul class="cards__container">
-          <li class="card">
-            <img src="./images/nizhny_novgorod.jpg" alt="Вид на башню Нижегородского кремля" class="card__image">
-            <div class="card__body">
-              <h2 class="card__title">Нижний Новгород</h2>
-              <button type="button" class="card__like-button"></button>
-            </div>
-          </li>
-          <li class="card">
-            <img src="./images/moscow_eda.jpg" alt="Курьер в Москве" class="card__image">
-            <div class="card__body">
-              <h2 class="card__title">Москва</h2>
-              <button type="button" class="card__like-button"></button>
-            </div>
-          </li>
-          <li class="card">
-            <img src="./images/nizhny_novgorod.jpg" alt="Вид на башню Нижегородского кремля" class="card__image">
-            <div class="card__body">
-              <h2 class="card__title">Нижний Новгород</h2>
-              <button type="button" class="card__like-button"></button>
-            </div>
-          </li>
-          <li class="card">
-            <img src="./images/shahunya.jpg" alt="Ну а это Шахунья" class="card__image">
-            <div class="card__body">
-              <h2 class="card__title">Шахунья</h2>
-              <button type="button" class="card__like-button"></button>
-            </div>
-          </li>
-          <li class="card">
-            <img src="./images/nizhny_novgorod.jpg" alt="Вид на башню Нижегородского кремля" class="card__image">
-            <div class="card__body">
-              <h2 class="card__title">Нижний Новгород</h2>
-              <button type="button" class="card__like-button"></button>
-            </div>
-          </li>
-          <li class="card">
-            <img src="./images/komi.jpg" alt="Коми, Республика Коми" class="card__image">
-            <div class="card__body">
-              <h2 class="card__title">Коми</h2>
-              <button type="button" class="card__like-button"></button>
-            </div>
-          </li>
         </ul>
       </section>
-
     </main>
 
     <footer class="footer">
       <p class="footer__copyright">&copy; 2021 Mesto Russia</p>
     </footer>
 
-    <!-- ! Извините, но как реализовать БЭМ-миксы для позиционирования я пока не очень понимаю, и сейчас нет времени-->
-    <!-- ! разбираться, я очень сильно отстаю от графика сдачи работ, но обязательно уделю время этому вопросу в будущем.  -->
-    <section class="popup">
+    <section class="popup popup_type_edit">
       <div class="popup__container">
         <button type="button" class="popup__close-button"></button>
         <h2 class="popup__header">Редактировать профиль</h2>
-        <form>
+        <form class="popup__form">
           <input type="text" class="popup__input popup__input_value_name" value="">
           <input type="text" class="popup__input popup__input_value_status" value="">
           <button type="submit" class="popup__save-button">Сохранить</button>
         </form>
       </div>
     </section>
+    <section class="popup popup_type_add-card">
+      <div class="popup__container">
+        <button type="button" class="popup__close-button"></button>
+        <h2 class="popup__header">Новое место</h2>
+        <form class="popup__form">
+          <input type="text" class="popup__input popup__input_value_place" value="" placeholder="Название">
+          <input type="text" class="popup__input popup__input_value_link" value="" placeholder="Ссылка на картинку">
+          <button type="submit" class="popup__save-button">Создать</button>
+        </form>
+      </div>
+    </section>
+    <section class="popup popup_type_image">
+      <figure class="popup__figure">
+        <button type="button" class="popup__close-button"></button>
+        <img src="" alt="" class="popup__picture">
+        <figcaption class="popup__caption"></figcaption>
+      </figure>
+    </section>
   </div>
+  <template class="card-template">
+    <li class="card">
+      <button type="button" class="card__button card__delete"></button>
+      <img src="" alt="" class="card__image">
+      <div class="card__body">
+        <h2 class="card__title"></h2>
+        <button type="button" class="card__button card__like"></button>
+      </div>
+    </li>
+  </template>
   <script defer src="./scripts/index.js"></script>
 </body>
 
