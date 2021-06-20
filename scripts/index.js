@@ -1,3 +1,14 @@
+const validationConfig = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__save-button',
+  inactiveButtonClass: 'popup__save-button_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__input-error_visible'
+};
+
+const popupElements = Array.from(document.querySelectorAll('.popup'));
+
 const buttonEdit = document.querySelector('.profile__button_type_edit');
 const buttonAdd = document.querySelector('.profile__button_type_add');
 
@@ -23,14 +34,25 @@ const popupLink = popupTypeAdd.querySelector('.popup__input_value_link');
 const cardsList = document.querySelector('.cards__container');
 const cardTemplate = document.querySelector('.card-template').content;
 
+const submitEditFormButton = formEditProfile.querySelector('.popup__save-button');
+
+const handleEscPress = (evt, popup) => {
+  if (evt.key === 'Escape') {
+    closePopup(popup);
+  }
+};
 
 const openPopup = popup => {
   popup.classList.add('popup_opened');
-}
+  document.addEventListener('keyup', evt => {
+    handleEscPress(evt, popup);
+  });
+};
 
 const closePopup = popup => {
   popup.classList.remove('popup_opened');
-}
+  document.removeEventListener('keyup', handleEscPress);
+};
 
 const renderCard = (cardObj) => {
   if (!cardObj.name || !cardObj.link) {
@@ -63,27 +85,26 @@ const renderCard = (cardObj) => {
   });
 
   return card;
-}
+};
 
 const renderCards = () => {
   initialCards.forEach(item => {
    const card = renderCard(item);
    cardsList.append(card);
   });
-}
+};
 
 const handlePopupTypeEdit = () => {
   popupName.value = profileName.textContent;
   popupStatus.value = profileStatus.textContent;
+  submitEditFormButton.classList.remove('popup__save-button_disabled');
+  submitEditFormButton.disabled = false;
   openPopup(popupTypeEdit);
-
-  popupTypeEditCloseBtn.focus();
-}
+};
 
 const handlePopupTypeAdd = () => {
   openPopup(popupTypeAdd);
-  popupTypeAddCloseBtn.focus();
-}
+};
 
 
 //* Area of functions calls
@@ -93,7 +114,6 @@ renderCards();
 buttonEdit.addEventListener('click', handlePopupTypeEdit);
 
 formEditProfile.addEventListener('submit', evt => {
-  evt.preventDefault();
   profileName.textContent =  popupName.value;
   profileStatus.textContent = popupStatus.value;
   closePopup(popupTypeEdit);
@@ -102,14 +122,11 @@ formEditProfile.addEventListener('submit', evt => {
 buttonAdd.addEventListener('click', handlePopupTypeAdd);
 
 formAddCard.addEventListener('submit', evt => {
-  evt.preventDefault();
   const card = renderCard({name: popupPlace.value, link: popupLink.value});
-  if (!card) {
-    closePopup(popupTypeAdd);
-  } else {
+  if (card) {
     cardsList.prepend(card);
-    closePopup(popupTypeAdd);
   }
+  closePopup(popupTypeAdd);
   formAddCard.reset();
 });
 
@@ -125,4 +142,11 @@ popupTypeImageCloseBtn.addEventListener('click', () => {
   closePopup(popupTypeImage);
 });
 
-
+popupElements.forEach(popupEl => {
+  popupEl.firstElementChild.addEventListener('click', (evt)=> {
+    evt.stopPropagation();
+  });
+  popupEl.addEventListener('click', () => {
+    closePopup(popupEl);
+  });
+});
