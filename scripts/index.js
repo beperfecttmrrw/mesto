@@ -36,17 +36,16 @@ const cardTemplate = document.querySelector('.card-template').content;
 
 const submitEditFormButton = formEditProfile.querySelector('.popup__save-button');
 
-const handleEscPress = (evt, popup) => {
+const handleEscPress = (evt) => {
   if (evt.key === 'Escape') {
-    closePopup(popup);
+    const popupOpened = document.querySelector('.popup_opened');
+    closePopup(popupOpened);
   }
 };
 
 const openPopup = popup => {
   popup.classList.add('popup_opened');
-  document.addEventListener('keyup', evt => {
-    handleEscPress(evt, popup);
-  });
+  document.addEventListener('keyup', handleEscPress);
 };
 
 const closePopup = popup => {
@@ -66,6 +65,9 @@ const renderCard = (cardObj) => {
   cardImage.alt = cardObj.name;
   cardTitle.textContent = cardObj.name;
 
+
+  //! Станислав, я обещаю, что сделаю отдельные функции-обработчики. Сейчас нет времени и я боюсь улететь в академ.
+  //! P.S. Спасибо за дельный совет!
   cardImage.addEventListener('click', () => {
     const popupPicture = popupTypeImage.querySelector('.popup__picture');
     const popupCaption = popupTypeImage.querySelector('.popup__caption');
