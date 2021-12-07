@@ -1,3 +1,9 @@
+import { initialCards } from "./initial-cards.js";
+import { Card } from "./Card.js";
+import { FormValidator } from "./FormValidator.js";
+
+
+
 const validationConfig = {
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
@@ -26,22 +32,19 @@ const popupTypeImageCloseBtn = popupTypeImage.querySelector('.popup__close-butto
 const formEditProfile = popupTypeEdit.querySelector('.popup__form');
 const formAddCard = popupTypeAdd.querySelector('.popup__form');
 
+const formEditProfileValidator = new FormValidator(formEditProfile, validationConfig);
+const formAddCardValidator = new FormValidator(formAddCard, validationConfig);
+
 const popupName = popupTypeEdit.querySelector('.popup__input_value_name');
 const popupStatus = popupTypeEdit.querySelector('.popup__input_value_status');
 const popupPlace = popupTypeAdd.querySelector('.popup__input_value_place');
 const popupLink = popupTypeAdd.querySelector('.popup__input_value_link');
 
 const cardsList = document.querySelector('.cards__container');
-const cardTemplate = document.querySelector('.card-template').content;
+const cardTemplateSelector = '.card-template';
 
 const submitEditFormButton = formEditProfile.querySelector('.popup__save-button');
 
-const handleEscPress = (evt) => {
-  if (evt.key === 'Escape') {
-    const popupOpened = document.querySelector('.popup_opened');
-    closePopup(popupOpened);
-  }
-};
 
 const openPopup = popup => {
   popup.classList.add('popup_opened');
@@ -53,46 +56,18 @@ const closePopup = popup => {
   document.removeEventListener('keyup', handleEscPress);
 };
 
-const renderCard = (cardObj) => {
-  if (!cardObj.name || !cardObj.link) {
-    return;
+const handleEscPress = evt => {
+  if (evt.key === 'Escape') {
+    const popupOpened = document.querySelector('.popup_opened');
+    closePopup(popupOpened);
   }
-  const card = cardTemplate.cloneNode(true);
-  const cardImage = card.querySelector('.card__image');
-  const cardTitle = card.querySelector('.card__title');
-
-  cardImage.src = cardObj.link;
-  cardImage.alt = cardObj.name;
-  cardTitle.textContent = cardObj.name;
-
-
-  //! Станислав, я обещаю, что сделаю отдельные функции-обработчики. Сейчас нет времени и я боюсь улететь в академ.
-  //! P.S. Спасибо за дельный совет!
-  cardImage.addEventListener('click', () => {
-    const popupPicture = popupTypeImage.querySelector('.popup__picture');
-    const popupCaption = popupTypeImage.querySelector('.popup__caption');
-
-    popupPicture.src = cardObj.link;
-    popupPicture.alt = cardObj.name;
-    popupCaption.textContent = cardObj.name;
-    openPopup(popupTypeImage);
-  });
-
-  card.querySelector('.card__like').addEventListener('click', (evt) => {
-    evt.target.classList.toggle('card__like_active');
-  });
-
-  card.querySelector('.card__delete').addEventListener('click', (evt) => {
-    evt.target.closest('.card').remove();
-  });
-
-  return card;
 };
 
 const renderCards = () => {
   initialCards.forEach(item => {
-   const card = renderCard(item);
-   cardsList.append(card);
+   const card = new Card(item, cardTemplateSelector);
+   const cardElement = card.renderCard();
+   cardsList.append(cardElement);
   });
 };
 
@@ -108,29 +83,32 @@ const handlePopupTypeAdd = () => {
   openPopup(popupTypeAdd);
 };
 
+const handlePopupTypeEditSubmit = () => {
+  profileName.textContent =  popupName.value;
+  profileStatus.textContent = popupStatus.value;
+  closePopup(popupTypeEdit);
+};
 
-//* Area of functions calls
+const handlePopupTypeAddSubmit = () => {
+  const card = new Card({name: popupPlace.value, link: popupLink.value}, cardTemplateSelector);
+  const cardElement = card.renderCard();
+  cardsList.prepend(cardElement);
+
+  closePopup(popupTypeAdd);
+  formAddCard.reset();
+}
+
+//Functions calls
 
 renderCards();
 
 buttonEdit.addEventListener('click', handlePopupTypeEdit);
 
-formEditProfile.addEventListener('submit', evt => {
-  profileName.textContent =  popupName.value;
-  profileStatus.textContent = popupStatus.value;
-  closePopup(popupTypeEdit);
-});
+formEditProfile.addEventListener('submit', handlePopupTypeEditSubmit);
 
 buttonAdd.addEventListener('click', handlePopupTypeAdd);
 
-formAddCard.addEventListener('submit', evt => {
-  const card = renderCard({name: popupPlace.value, link: popupLink.value});
-  if (card) {
-    cardsList.prepend(card);
-  }
-  closePopup(popupTypeAdd);
-  formAddCard.reset();
-});
+formAddCard.addEventListener('submit', handlePopupTypeAddSubmit);
 
 popupTypeEditCloseBtn.addEventListener('click', () => {
   closePopup(popupTypeEdit);
@@ -152,3 +130,13 @@ popupElements.forEach(popupEl => {
     closePopup(popupEl);
   });
 });
+
+formEditProfileValidator.enableValidation();
+formAddCardValidator.enableValidation();
+
+
+
+
+//* EXPORT AREA
+
+export { validationConfig, popupTypeImage, openPopup};
