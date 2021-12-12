@@ -40,6 +40,9 @@ const popupStatus = popupTypeEdit.querySelector('.popup__input_value_status');
 const popupPlace = popupTypeAdd.querySelector('.popup__input_value_place');
 const popupLink = popupTypeAdd.querySelector('.popup__input_value_link');
 
+const popupPicture = popupTypeImage.querySelector('.popup__picture');
+const popupCaption = popupTypeImage.querySelector('.popup__caption');
+
 const cardsList = document.querySelector('.cards__container');
 const cardTemplateSelector = '.card-template';
 
@@ -65,11 +68,18 @@ const handleEscPress = evt => {
 
 const renderCards = () => {
   initialCards.forEach(item => {
-   const card = new Card(item, cardTemplateSelector);
+   const card = new Card(item, cardTemplateSelector, handleCardImageClick);
    const cardElement = card.renderCard();
    cardsList.append(cardElement);
   });
 };
+
+const handleCardImageClick = (cardObj) => {
+  popupPicture.src = cardObj.link;
+  popupPicture.alt = cardObj.name;
+  popupCaption.textContent = cardObj.name;
+  openPopup(popupTypeImage);
+}
 
 const handlePopupTypeEdit = () => {
   popupName.value = profileName.textContent;
@@ -90,7 +100,7 @@ const handlePopupTypeEditSubmit = () => {
 };
 
 const handlePopupTypeAddSubmit = () => {
-  const card = new Card({name: popupPlace.value, link: popupLink.value}, cardTemplateSelector);
+  const card = new Card({name: popupPlace.value, link: popupLink.value}, cardTemplateSelector, handleCardImageClick);
   const cardElement = card.renderCard();
   cardsList.prepend(cardElement);
 
@@ -139,4 +149,4 @@ formAddCardValidator.enableValidation();
 
 //* EXPORT AREA
 
-export { validationConfig, popupTypeImage, openPopup};
+export { validationConfig };

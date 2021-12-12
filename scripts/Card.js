@@ -1,10 +1,12 @@
-import { popupTypeImage, openPopup } from "./index.js";
 
 
 export class Card {
-  constructor(data, templateSelector) {
+  constructor(data, templateSelector, cardImageClickHandler) {
     this._templateSelector = templateSelector;
     this._cardObj = data;
+
+    //functions
+    this._cardImageClickHandler = cardImageClickHandler;
   }
 
   _getTemplate = () => {
@@ -18,7 +20,7 @@ export class Card {
   }
 
   _toggleCardLike = () => {
-    this._element.querySelector('.card__like').classList.toggle('card__like_active');
+    this._cardLikeButton.classList.toggle('card__like_active');
   }
 
   _handleCardDelete = () => {
@@ -26,34 +28,26 @@ export class Card {
     this._element = null;
   }
 
-  _handleCardImageClick = (cardObj) => {
-    const popupPicture = popupTypeImage.querySelector('.popup__picture');
-    const popupCaption = popupTypeImage.querySelector('.popup__caption');
-
-    popupPicture.src = cardObj.link;
-    popupPicture.alt = cardObj.name;
-    popupCaption.textContent = cardObj.name;
-    openPopup(popupTypeImage);
-  }
-
   _setEventListeners = () => {
-    this._element.querySelector('.card__like').addEventListener('click', this._toggleCardLike);
-    this._element.querySelector('.card__delete').addEventListener('click', this._handleCardDelete);
-    this._element.querySelector('.card__image').addEventListener('click', () => {
-      this._handleCardImageClick(this._cardObj);
+    this._cardLikeButton.addEventListener('click', this._toggleCardLike);
+    this._cardDeleteButton.addEventListener('click', this._handleCardDelete);
+    this._cardImageElement.addEventListener('click', () => {
+      this._cardImageClickHandler(this._cardObj);
     });
   }
 
   renderCard = () => {
     this._element = this._getTemplate();
+    this._cardImageElement = this._element.querySelector('.card__image');
+    this._cardTitleElement = this._element.querySelector('.card__title');
+    this._cardLikeButton = this._element.querySelector('.card__like');
+    this._cardDeleteButton = this._element.querySelector('.card__delete');
+
     this._setEventListeners();
 
-    const cardImage = this._element.querySelector('.card__image');
-    const cardTitle = this._element.querySelector('.card__title');
-
-    cardImage.src = this._cardObj.link;
-    cardImage.alt = this._cardObj.name;
-    cardTitle.textContent = this._cardObj.name;
+    this._cardImageElement.src = this._cardObj.link;
+    this._cardImageElement.alt = this._cardObj.name;
+    this._cardTitleElement.textContent = this._cardObj.name;
 
     return this._element;
   }
