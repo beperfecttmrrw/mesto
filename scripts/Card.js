@@ -11,20 +11,22 @@ export class Card {
     const cardElement = document
       .querySelector(this._templateSelector)
       .content
+      .querySelector('.card')
       .cloneNode(true);
 
     return cardElement;
   }
 
-  _toggleCardLike = (evt) => {
-    evt.target.classList.toggle('card__like_active');
+  _toggleCardLike = () => {
+    this._element.querySelector('.card__like').classList.toggle('card__like_active');
   }
 
-  _handleCardDeleteBtn = (evt) => {
-    evt.target.closest('.card').remove();
+  _handleCardDelete = () => {
+    this._element.remove();
+    this._element = null;
   }
 
-  _hanleCardImageClick = (cardObj) => {
+  _handleCardImageClick = (cardObj) => {
     const popupPicture = popupTypeImage.querySelector('.popup__picture');
     const popupCaption = popupTypeImage.querySelector('.popup__caption');
 
@@ -36,24 +38,18 @@ export class Card {
 
   _setEventListeners = () => {
     this._element.querySelector('.card__like').addEventListener('click', this._toggleCardLike);
-    this._element.querySelector('.card__delete').addEventListener('click', this._handleCardDeleteBtn);
+    this._element.querySelector('.card__delete').addEventListener('click', this._handleCardDelete);
     this._element.querySelector('.card__image').addEventListener('click', () => {
-      this._hanleCardImageClick(this._cardObj);
+      this._handleCardImageClick(this._cardObj);
     });
   }
 
   renderCard = () => {
-    if (!this._cardObj.name || !this._cardObj.link) {
-      return;
-    }
-
     this._element = this._getTemplate();
     this._setEventListeners();
 
     const cardImage = this._element.querySelector('.card__image');
     const cardTitle = this._element.querySelector('.card__title');
-
-    this._setEventListeners();
 
     cardImage.src = this._cardObj.link;
     cardImage.alt = this._cardObj.name;
