@@ -1,7 +1,7 @@
 .popup__input-error {
-  width: 358px;
+  width: 100%;
   position: absolute;
-  top: 28px;
+  top: 62px;
   left: 0;
   visibility: hidden;
   display: inline-block;
@@ -11,12 +11,9 @@
   line-height: 15px;
 }
 
-@media screen and (max-width: 440px) {
+@media screen and (max-width: 355px) {
   .popup__input-error {
-    width: 74vw;
     font-size: 10px;
-    line-height: 12px;
-    min-height: 12px;
   }
 }
 
