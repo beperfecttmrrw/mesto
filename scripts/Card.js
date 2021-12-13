@@ -1,9 +1,9 @@
 
 
 export class Card {
-  constructor(data, templateSelector, cardImageClickHandler) {
-    this._templateSelector = templateSelector;
-    this._cardObj = data;
+  constructor(cardData, cardTemplateSelector, cardImageClickHandler) {
+    this._templateSelector = cardTemplateSelector;
+    this._cardObj = cardData;
 
     //functions
     this._cardImageClickHandler = cardImageClickHandler;

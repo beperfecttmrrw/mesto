@@ -1,17 +1,16 @@
 import { initialCards } from "./initial-cards.js";
 import { Card } from "./Card.js";
 import { FormValidator } from "./FormValidator.js";
+import { validationConfig } from "./constants.js";
 
 
 
-const validationConfig = {
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__save-button',
-  inactiveButtonClass: 'popup__save-button_disabled',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__input-error_visible'
-};
+
+// Спасибо за отличное ревью, Надежда! Мне очень понравилось исправлять проект по вашим рекомендациям.
+// Мой код хорошо читается или нужно добавлять комментарии?
+
+// Здоровья вам и вашим близким. Успехов в делах!
+
 
 const popupElements = Array.from(document.querySelectorAll('.popup'));
 
@@ -48,6 +47,10 @@ const cardTemplateSelector = '.card-template';
 
 const submitEditFormButton = formEditProfile.querySelector('.popup__save-button');
 
+const createCard = (cardData, cardTemplateSelector, cardImageClickHandler) => {
+  const card = new Card(cardData, cardTemplateSelector, cardImageClickHandler);
+  return card.renderCard();
+};
 
 const openPopup = popup => {
   popup.classList.add('popup_opened');
@@ -68,9 +71,7 @@ const handleEscPress = evt => {
 
 const renderCards = () => {
   initialCards.forEach(item => {
-   const card = new Card(item, cardTemplateSelector, handleCardImageClick);
-   const cardElement = card.renderCard();
-   cardsList.append(cardElement);
+   cardsList.append(createCard(item, cardTemplateSelector, handleCardImageClick));
   });
 };
 
@@ -79,17 +80,18 @@ const handleCardImageClick = (cardObj) => {
   popupPicture.alt = cardObj.name;
   popupCaption.textContent = cardObj.name;
   openPopup(popupTypeImage);
-}
+};
 
 const handlePopupTypeEdit = () => {
   popupName.value = profileName.textContent;
   popupStatus.value = profileStatus.textContent;
-  submitEditFormButton.classList.remove('popup__save-button_disabled');
-  submitEditFormButton.disabled = false;
+  formEditProfileValidator.checkInputsValidity();
+  formEditProfileValidator.toggleSubmitBtnState();
   openPopup(popupTypeEdit);
 };
 
 const handlePopupTypeAdd = () => {
+  formAddCardValidator.toggleSubmitBtnState();
   openPopup(popupTypeAdd);
 };
 
@@ -100,10 +102,7 @@ const handlePopupTypeEditSubmit = () => {
 };
 
 const handlePopupTypeAddSubmit = () => {
-  const card = new Card({name: popupPlace.value, link: popupLink.value}, cardTemplateSelector, handleCardImageClick);
-  const cardElement = card.renderCard();
-  cardsList.prepend(cardElement);
-
+  cardsList.prepend(createCard({name: popupPlace.value, link: popupLink.value}, cardTemplateSelector, handleCardImageClick));
   closePopup(popupTypeAdd);
   formAddCard.reset();
 }
@@ -147,6 +146,3 @@ formAddCardValidator.enableValidation();
 
 
 
-//* EXPORT AREA
-
-export { validationConfig };
