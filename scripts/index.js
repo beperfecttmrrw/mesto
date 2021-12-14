@@ -5,13 +5,6 @@ import { validationConfig } from "./constants.js";
 
 
 
-
-// Спасибо за отличное ревью, Надежда! Мне очень понравилось исправлять проект по вашим рекомендациям.
-// Мой код хорошо читается или нужно добавлять комментарии?
-
-// Здоровья вам и вашим близким. Успехов в делах!
-
-
 const popupElements = Array.from(document.querySelectorAll('.popup'));
 
 const buttonEdit = document.querySelector('.profile__button_type_edit');
@@ -36,6 +29,7 @@ const formAddCardValidator = new FormValidator(formAddCard, validationConfig);
 
 const popupName = popupTypeEdit.querySelector('.popup__input_value_name');
 const popupStatus = popupTypeEdit.querySelector('.popup__input_value_status');
+
 const popupPlace = popupTypeAdd.querySelector('.popup__input_value_place');
 const popupLink = popupTypeAdd.querySelector('.popup__input_value_link');
 
@@ -43,9 +37,9 @@ const popupPicture = popupTypeImage.querySelector('.popup__picture');
 const popupCaption = popupTypeImage.querySelector('.popup__caption');
 
 const cardsList = document.querySelector('.cards__container');
+
 const cardTemplateSelector = '.card-template';
 
-const submitEditFormButton = formEditProfile.querySelector('.popup__save-button');
 
 const createCard = (cardData, cardTemplateSelector, cardImageClickHandler) => {
   const card = new Card(cardData, cardTemplateSelector, cardImageClickHandler);
@@ -82,19 +76,20 @@ const handleCardImageClick = (cardObj) => {
   openPopup(popupTypeImage);
 };
 
+//Popup open buttons click handlers | Обработчики кликов по кнопкам открытия попапов
 const handlePopupTypeEdit = () => {
   popupName.value = profileName.textContent;
   popupStatus.value = profileStatus.textContent;
-  formEditProfileValidator.checkInputsValidity();
-  formEditProfileValidator.toggleSubmitBtnState();
+  formEditProfileValidator.resetValidation();
   openPopup(popupTypeEdit);
 };
 
 const handlePopupTypeAdd = () => {
-  formAddCardValidator.toggleSubmitBtnState();
+  formAddCardValidator.resetValidation();
   openPopup(popupTypeAdd);
 };
 
+//Popups submit handlers | Обработчики сабмита попапов
 const handlePopupTypeEditSubmit = () => {
   profileName.textContent =  popupName.value;
   profileStatus.textContent = popupStatus.value;
@@ -107,7 +102,7 @@ const handlePopupTypeAddSubmit = () => {
   formAddCard.reset();
 }
 
-//Functions calls
+//Functions call and event listeners adding area | Зона вызова функций и добавления слушателей событий
 
 renderCards();
 

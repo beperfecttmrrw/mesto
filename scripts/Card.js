@@ -9,7 +9,7 @@ export class Card {
     this._cardImageClickHandler = cardImageClickHandler;
   }
 
-  _getTemplate = () => {
+  _getCardTemplate = () => {
     const cardElement = document
       .querySelector(this._templateSelector)
       .content
@@ -37,7 +37,7 @@ export class Card {
   }
 
   renderCard = () => {
-    this._element = this._getTemplate();
+    this._element = this._getCardTemplate();
     this._cardImageElement = this._element.querySelector('.card__image');
     this._cardTitleElement = this._element.querySelector('.card__title');
     this._cardLikeButton = this._element.querySelector('.card__like');
